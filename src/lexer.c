@@ -82,7 +82,10 @@ Token* lexer_read_number_literal(Lexer* lexer) {
 	// ([0-9]*)\.([0-9]*)((e)[\-\+][0-9]+)?
 	int n = 1;
 	char next = lexer_peek(lexer, n);
-	while (isdigit(next) || next == 'e' || next == '.' || next == '-' || next == '+') {
+	int is_exponent = 0;
+
+	while (isdigit(next) || next == 'e' || next == '.' || (is_exponent && (next == '-' || next == '+'))) {
+		if (!is_exponent && next == 'e') is_exponent = 1;
 		n++;
 		next = lexer_peek(lexer, n);
 	}

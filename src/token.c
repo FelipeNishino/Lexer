@@ -3,7 +3,19 @@
 #include <string.h>
 #include "include/token.h"
 
-void token_print(Token* t) { fprintf(stdout, "<%s(%s)>\n", TOKEN_STRING[t->type], t->value); }
+void token_print(Token* t) { 
+    switch(t->type) {
+        case Numero:
+            fprintf(stdout, "<%s(%s)>\n", TOKEN_STRING[t->type], t->value);
+            break;
+        case Abre_Parenteses:
+        case Fecha_Parenteses:
+            fprintf(stdout, "<%s(%s)>\n", "Pontuacao", TOKEN_STRING[t->type]);
+            break;
+        default:
+            fprintf(stdout, "<%s(%s)>\n", "Operador", TOKEN_STRING[t->type]);
+    }   
+}
 
 Token*
 token_init(char* value, TokenType type, unsigned int line, unsigned int col) {
