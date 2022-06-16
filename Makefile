@@ -1,6 +1,6 @@
 DIR := ${CURDIR}
 
-exec = a.out
+exec = lexer.out
 sources = $(wildcard src/*.c)
 objects = $(sources:.c=.o)
 flags = -g -Wall -fPIC -std=c11
@@ -18,4 +18,4 @@ clean:
 	-rm src/*.o
 
 run: $(exec)
-	./a.out input.txt
+	./lexer.out input.txt
